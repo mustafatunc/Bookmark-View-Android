@@ -23,7 +23,7 @@
 
     <!--Ribbon View-->
     <declare-styleable name="RibbonView">
-        <attr name="ribbonShadowColor" format="color" />
+        <attr name="ribbonHasShadow" format="boolean" />
         <attr name="ribbonColor" format="color" />
         <attr name="ribbonWidth" format="dimension" />
         <attr name="ribbonHeight" format="dimension" />

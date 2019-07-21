@@ -7,19 +7,40 @@
         tools:context=".MainActivity">
 
 
+    <com.mustafa.bookmarkviews.RibbonView
+            android:background="@color/colorPrimary"
+            android:id="@+id/ribbonView"
+            android:layout_width="match_parent"
+            app:ribbonColor="@color/colorAccent"
+            app:ribbonHeight="32dp"
+            app:ribbonWidth="16dp"
+            app:ribbonTriangleHeight="8dp"
+            app:ribbonDistanceFromEnd="16dp"
+            app:ribbonHasShadow="true"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp">
+
+
+    </com.mustafa.bookmarkviews.RibbonView>
+
+
     <com.mustafa.bookmarkviews.CircleView
             android:background="@color/colorPrimary"
             android:layout_width="160dp"
             android:layout_height="200dp"
-            android:layout_marginTop="64dp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:circleColor="@color/colorAccent"
             app:circleHasShadow="true"
             app:circleDistanceFromEnd="8dp"
             app:circleDistanceFromTop="8dp"
             app:circleRadius="4dp"
-            android:layout_marginStart="8dp">
+            android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
     </com.mustafa.bookmarkviews.CircleView>
 

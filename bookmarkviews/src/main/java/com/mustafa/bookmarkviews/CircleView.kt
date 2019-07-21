@@ -2,7 +2,9 @@ package com.mustafa.bookmarkviews
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
@@ -33,11 +35,6 @@ class CircleView: FrameLayout {
     init{
         setWillNotDraw(false)
     }
-
-
-    private var Cr: Float = 0.0f // Circle Radius in pixel
-    private var Cx: Float = 0.0f // Circle's Center Distance from the Right Edge
-    private var Cy: Float = 0.0f // Circle's Center Distance from the Top Edge
 
 
     private var circleColor: ColorStateList? = null
@@ -80,9 +77,6 @@ class CircleView: FrameLayout {
             }
         }
 
-        Cr = Util.convertDpToPixel(circleRadius, context)
-        Cx = Util.convertDpToPixel(distanceFromEnd, context)
-        Cy = Util.convertDpToPixel(distanceFromTop, context)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -91,7 +85,6 @@ class CircleView: FrameLayout {
     }
 
     private fun drawShape(canvas: Canvas) {
-
         with(paint) {
             strokeWidth = 2.0f
             color = circleColor?.defaultColor?: Color.BLACK
@@ -105,7 +98,7 @@ class CircleView: FrameLayout {
             }
         }
 
-        canvas.drawCircle(width.toFloat() - Cx, Cy, Cr, paint)
+        canvas.drawCircle(width.toFloat() - distanceFromEnd, distanceFromTop, circleRadius, paint)
     }
 
 }
