@@ -1,100 +1,123 @@
 package com.mustafa.bookmarkviews
 
 import android.content.Context
-import android.graphics.*
+import android.content.res.ColorStateList
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
 import androidx.annotation.StyleRes
 
-class StripeView: FrameLayout {
+class StripeView : FrameLayout {
 
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs, 0){
-        if(attrs!=null)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs, 0) {
+        if (attrs != null)
             initWithAttrs(attrs)
     }
-    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(context, attrs, defStyleAttr, 0){
-        if(attrs!=null)
+
+    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr,
+        0
+    ) {
+        if (attrs != null)
             initWithAttrs(attrs)
     }
+
     constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int, @StyleRes defStyleRes: Int) : super(
         context,
         attrs,
         defStyleAttr,
         defStyleRes
-    ){
-        if(attrs!=null)
+    ) {
+        if (attrs != null)
             initWithAttrs(attrs)
     }
 
-    init{
+    init {
         setWillNotDraw(false)
     }
 
-    private val DpGw = 8 // Space width from right edge
-    private val DpSw = 6 // Ribbon width
+//    private val linearGradient: LinearGradient
 
-    private val Gw: Float // Ribbon width
-    private val Sw: Float // Space width from right edge
-
-    private val linearGradient: LinearGradient
-
-    private val path = Path()
+    private val rect = Rect()
     private val paint = Paint()
 
-
+    private var stripeColor: ColorStateList? = null
+    private var stripeDistanceFromEnd = 0.0f
+    private var stripeWidth = 0.0f
+    private var stripeHasShadow = false
 
     init {
-        Sw = Util.convertDpToPixel(DpSw.toFloat(), context)
-        Gw = Util.convertDpToPixel(DpGw.toFloat(), context)
 
-        linearGradient =
-            LinearGradient(
-                0.0f,
-                0.0f,
-                0.0f,
-                height.toFloat(),
-                Color.parseColor("#FF1111"),
-                Color.parseColor("#FF6666"),
-                Shader.TileMode.MIRROR
-            )
+//        linearGradient =
+//            LinearGradient(
+//                0.0f,
+//                0.0f,
+//                0.0f,
+//                height.toFloat(),
+//                Color.parseColor("#FF1111"),
+//                Color.parseColor("#FF6666"),
+//                Shader.TileMode.MIRROR
+//            )
 
     }
 
     private fun initWithAttrs(attrs: AttributeSet) {
 
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.StripeView,
+            0, 0
+        ).apply {
+
+            try {
+                stripeColor = getColorStateList(R.styleable.StripeView_stripeColor)
+                stripeDistanceFromEnd = getDimension(R.styleable.StripeView_stripeDistanceFromEnd, 16.0f)
+                stripeWidth = getDimension(R.styleable.StripeView_stripeWidth, 8.0f)
+                stripeHasShadow = getBoolean(R.styleable.StripeView_stripeHasShadow, false)
+            } finally {
+                recycle()
+            }
+        }
     }
 
-    private fun drawShape(canvas: Canvas) {
-        paint.strokeWidth = 4.0f
-        paint.color = Color.RED
+    override fun onDraw(canvas: Canvas?) {
+        paint.strokeWidth = 2.0f
+        paint.color = stripeColor?.defaultColor ?: Color.BLACK
         paint.style = Paint.Style.FILL_AND_STROKE
         paint.isAntiAlias = true
-        paint.shader = linearGradient
-        paint.setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
-        setLayerType(LAYER_TYPE_SOFTWARE, paint)
+//        paint.shader = linearGradient
+
+        if (stripeHasShadow) {
+            paint.setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
+            setLayerType(LAYER_TYPE_SOFTWARE, paint)
+        }
 
         drawStripe()
 
-        canvas.drawPath(path, paint)
+        canvas?.drawRect(rect, paint)
     }
 
 
     private fun drawStripe() {
-        val w = width.toFloat()
-        val h = height.toFloat()
+        val w = width
 
-        path.fillType = Path.FillType.EVEN_ODD
+        val Gw = stripeDistanceFromEnd // Gap from the right edge
+        val Sw = stripeWidth // Width of the stripe
 
-        path.moveTo(w - Gw, 0.0f)
-        path.lineTo(w - Gw, 0.0f) // Top Right
-        path.lineTo(w - Gw, h) // Bottom Right
-        path.lineTo(w - Gw - Sw, h) // Bottom Left
-        path.lineTo(w - Gw - Sw, 0.0f) // Bottom Left
-
-        path.close()
+        rect.set(
+            (w - Gw - Sw).toInt(),
+            0,
+            (w - Gw).toInt(),
+            height
+        )
     }
 
 

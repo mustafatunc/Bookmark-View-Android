@@ -54,7 +54,6 @@ class RibbonView : FrameLayout {
     }
 
 
-
 //    private val linearGradient: LinearGradient
 
     private val path = Path()
@@ -112,7 +111,7 @@ class RibbonView : FrameLayout {
         paint.isAntiAlias = true
 //        paint.shader = linearGradient
 
-        if(ribbonHasShadow){
+        if (ribbonHasShadow) {
             paint.setShadowLayer(
                 Util.convertDpToPixel(2.0f, context),
                 2.0f,
