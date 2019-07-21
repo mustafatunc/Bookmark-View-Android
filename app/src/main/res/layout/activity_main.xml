@@ -55,5 +55,18 @@
 
     </com.mustafa.bookmarkviews.CircleView>
 
+    <com.mustafa.bookmarkviews.TriangleView
+            app:triangleColor="@color/colorAccent"
+            app:triangleHeight="24dp"
+            app:triangleWidth="32dp"
+            app:triangleHasShadow="true"
+            android:background="@color/colorPrimary"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp">
+
+    </com.mustafa.bookmarkviews.TriangleView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
