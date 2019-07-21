@@ -42,30 +42,40 @@ class TriangleView : FrameLayout {
     }
 
 
-//    private val linearGradient: LinearGradient
+    private var linearGradient: LinearGradient? = null
 
     private val path = Path()
     private val paint = Paint()
 
-    private var triangleHasShadow = false
-    private var triangleColor: ColorStateList? = null
-    private var triangleWidth = 8.0f
-    private var triangleHeight = 8.0f
+    var triangleHasShadow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
+    var triangleColor: ColorStateList? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-    init {
+    var triangleWidth = 8.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-//        linearGradient =
-//            LinearGradient(
-//                0.0f,
-//                0.0f,
-//                0.0f,
-//                Th,
-//                Color.parseColor("#FF1111"),
-//                Color.parseColor("#FF7777"),
-//                Shader.TileMode.MIRROR
-//            )
-    }
+    var triangleHeight = 8.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var shouldShow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     private fun initWithAttrs(attrs: AttributeSet) {
         context.theme.obtainStyledAttributes(
@@ -86,16 +96,23 @@ class TriangleView : FrameLayout {
     }
 
     override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
 
-        paint.strokeWidth = 2.0f
-        paint.color = triangleColor?.defaultColor?:Color.BLACK
-        paint.style = Paint.Style.FILL_AND_STROKE
-        paint.isAntiAlias = true
-//        paint.shader = linearGradient
+        if (!shouldShow) return
 
-        if(triangleHasShadow){
-            paint.setShadowLayer(Util.convertDpToPixel(2.0f, context), -2.0f, -2.0f, Color.BLACK)
-            setLayerType(LAYER_TYPE_SOFTWARE, paint)
+        with(paint) {
+            strokeWidth = 2.0f
+            color = triangleColor?.defaultColor ?: Color.BLACK
+            style = Paint.Style.FILL_AND_STROKE
+            isAntiAlias = true
+            if (linearGradient != null) {
+                shader = linearGradient
+            }
+
+            if (triangleHasShadow) {
+                setShadowLayer(Util.convertDpToPixel(2.0f, context), -2.0f, -2.0f, Color.BLACK)
+                setLayerType(LAYER_TYPE_SOFTWARE, this)
+            }
         }
 
         drawTriangle()
@@ -119,6 +136,22 @@ class TriangleView : FrameLayout {
         path.lineTo(w, 0.0f) // Right Top Corner
 
         path.close()
+    }
+
+    // public apis except the attributes above
+    /**If this is set, the color given will be gone and the colors given here will be used*/
+    fun setGradientColor(from: Int, to: Int) {
+        linearGradient =
+            LinearGradient(
+                0.0f,
+                0.0f,
+                0.0f,
+                triangleHeight,
+                from,
+                to,
+                Shader.TileMode.CLAMP
+            )
+        invalidate()
     }
 
 }

@@ -2,10 +2,7 @@ package com.mustafa.bookmarkviews
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
@@ -44,30 +41,40 @@ class StripeView : FrameLayout {
         setWillNotDraw(false)
     }
 
-//    private val linearGradient: LinearGradient
+    private var linearGradient: LinearGradient? = null
 
     private val rect = Rect()
     private val paint = Paint()
 
-    private var stripeColor: ColorStateList? = null
-    private var stripeDistanceFromEnd = 0.0f
-    private var stripeWidth = 0.0f
-    private var stripeHasShadow = false
+    var stripeColor: ColorStateList? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-    init {
+    var stripeDistanceFromEnd = 0.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-//        linearGradient =
-//            LinearGradient(
-//                0.0f,
-//                0.0f,
-//                0.0f,
-//                height.toFloat(),
-//                Color.parseColor("#FF1111"),
-//                Color.parseColor("#FF6666"),
-//                Shader.TileMode.MIRROR
-//            )
+    var stripeWidth = 0.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-    }
+    var stripeHasShadow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var shouldShow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     private fun initWithAttrs(attrs: AttributeSet) {
 
@@ -89,15 +96,25 @@ class StripeView : FrameLayout {
     }
 
     override fun onDraw(canvas: Canvas?) {
-        paint.strokeWidth = 2.0f
-        paint.color = stripeColor?.defaultColor ?: Color.BLACK
-        paint.style = Paint.Style.FILL_AND_STROKE
-        paint.isAntiAlias = true
-//        paint.shader = linearGradient
+        super.onDraw(canvas)
 
-        if (stripeHasShadow) {
-            paint.setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
-            setLayerType(LAYER_TYPE_SOFTWARE, paint)
+        if (!shouldShow) return
+
+        paint.apply {
+
+            strokeWidth = 2.0f
+            color = stripeColor?.defaultColor ?: Color.BLACK
+            style = Paint.Style.FILL_AND_STROKE
+            isAntiAlias = true
+            if (linearGradient != null) {
+                shader = linearGradient
+            }
+
+            if (stripeHasShadow) {
+                setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
+                setLayerType(LAYER_TYPE_SOFTWARE, this)
+            }
+
         }
 
         drawStripe()
@@ -121,4 +138,19 @@ class StripeView : FrameLayout {
     }
 
 
+    // public apis except the attributes above
+    /**If this is set, the color given will be gone and the colors given here will be used*/
+    fun setGradientColor(from: Int, to: Int) {
+        linearGradient =
+            LinearGradient(
+                0.0f,
+                0.0f,
+                0.0f,
+                height.toFloat(),
+                from,
+                to,
+                Shader.TileMode.CLAMP
+            )
+        invalidate()
+    }
 }

@@ -2,10 +2,7 @@ package com.mustafa.bookmarkviews
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.graphics.Path.FillType
 import android.util.AttributeSet
 import android.widget.FrameLayout
@@ -54,32 +51,52 @@ class RibbonView : FrameLayout {
     }
 
 
-//    private val linearGradient: LinearGradient
+    private var linearGradient: LinearGradient? = null
 
     private val path = Path()
     private val paint = Paint()
 
-    private var ribbonHasShadow = false
-    private var ribbonColor: ColorStateList? = null
-    private var ribbonWidth = 0.0f
-    private var ribbonHeight = 0.0f
-    private var ribbonTriangleHeight = 0.0f
-    private var distanceFromEnd = 0.0f
+    var ribbonHasShadow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
+    var ribbonColor: ColorStateList? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-    init {
+    var ribbonWidth = 0.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-//        linearGradient =
-//            LinearGradient(
-//                0.0f,
-//                0.0f,
-//                0.0f,
-//                Rh,
-//                Color.parseColor("#FF1111"),
-//                Color.parseColor("#FF7777"),
-//                Shader.TileMode.MIRROR
-//            )
-    }
+    var ribbonHeight = 0.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var ribbonTriangleHeight = 0.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var distanceFromEnd = 0.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var shouldShow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     private fun initWithAttrs(attrs: AttributeSet) {
         context.theme.obtainStyledAttributes(
@@ -105,22 +122,29 @@ class RibbonView : FrameLayout {
 
 
     override fun onDraw(canvas: Canvas?) {
-        paint.strokeWidth = 2.0f
-        paint.color = ribbonColor?.defaultColor ?: Color.BLACK
-        paint.style = Paint.Style.FILL_AND_STROKE
-        paint.isAntiAlias = true
-//        paint.shader = linearGradient
+        super.onDraw(canvas)
 
-        if (ribbonHasShadow) {
-            paint.setShadowLayer(
-                Util.convertDpToPixel(2.0f, context),
-                2.0f,
-                2.0f,
-                Color.BLACK
-            )
+        if (!shouldShow) return
+
+        paint.apply {
+            strokeWidth = 2.0f
+            color = ribbonColor?.defaultColor ?: Color.BLACK
+            style = Paint.Style.FILL_AND_STROKE
+            isAntiAlias = true
+            if (linearGradient != null) {
+                shader = linearGradient
+            }
+
+            if (ribbonHasShadow) {
+                setShadowLayer(
+                    Util.convertDpToPixel(2.0f, context),
+                    2.0f,
+                    2.0f,
+                    Color.BLACK
+                )
+            }
+            setLayerType(LAYER_TYPE_SOFTWARE, this)
         }
-
-        setLayerType(LAYER_TYPE_SOFTWARE, paint)
 
         drawRibbon()
 
@@ -149,5 +173,20 @@ class RibbonView : FrameLayout {
 
     }
 
+    // public apis except the attributes above
+    /**If this is set, the color given will be gone and the colors given here will be used*/
+    fun setGradientColor(from: Int, to: Int) {
+        linearGradient =
+            LinearGradient(
+                0.0f,
+                0.0f,
+                0.0f,
+                ribbonHeight,
+                from,
+                to,
+                Shader.TileMode.CLAMP
+            )
+        invalidate()
+    }
 
 }

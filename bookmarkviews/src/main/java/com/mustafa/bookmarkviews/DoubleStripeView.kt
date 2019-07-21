@@ -2,10 +2,7 @@ package com.mustafa.bookmarkviews
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
@@ -51,31 +48,65 @@ class DoubleStripeView : FrameLayout {
     private val rectRight = Rect()
     private val rectLeft = Rect()
 
-
-    private var stripesHaveShadow = false
-    private var stripeRightColor: ColorStateList? = null
-    private var stripeLeftColor: ColorStateList? = null
-    private var stripeRightDistanceFromEnd = 16.0f
-    private var stripeLeftDistanceFromRightStripe = 8.0f
-    private var stripeRightWidth = 8.0f
-    private var stripeLeftWidth = 4.0f
+    private var linearGradientLeft: LinearGradient? = null
+    private var linearGradientRight: LinearGradient? = null
 
 
-//    private val linearGradient: LinearGradient
+    var stripesHaveShadow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-    init {
-//        linearGradient =
-//            LinearGradient(
-//                0.0f,
-//                0.0f,
-//                0.0f,
-//                height.toFloat(),
-//                Color.parseColor("#FF1111"),
-//                Color.parseColor("#FF6666"),
-//                Shader.TileMode.MIRROR
-//            )
+    var stripeRightColor: ColorStateList? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-    }
+    var stripeLeftColor: ColorStateList? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var stripeRightDistanceFromEnd = 16.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var stripeLeftDistanceFromRightStripe = 8.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var stripeRightWidth = 8.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var stripeLeftWidth = 4.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+
+    var shouldShowLeft = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var shouldShowRight = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+
 
     private fun initWithAttrs(attrs: AttributeSet) {
 
@@ -109,23 +140,28 @@ class DoubleStripeView : FrameLayout {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+
         canvas?.let {
-            drawShapeLeft(it)
-            drawShapeRight(it)
+            if (shouldShowLeft) {
+                drawShapeLeft(it)
+            }
+            if (shouldShowRight) {
+                drawShapeRight(it)
+            }
         }
     }
 
 
     private fun drawShapeLeft(canvas: Canvas) {
-        with(paintLeft) {
+        paintLeft.apply {
             strokeWidth = 2.0f
             style = Paint.Style.FILL_AND_STROKE
             isAntiAlias = true
             color = stripeLeftColor?.defaultColor ?: Color.BLACK
 
-            if(stripesHaveShadow){
-                    setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
-                    setLayerType(LAYER_TYPE_SOFTWARE, this)
+            if (stripesHaveShadow) {
+                setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
+                setLayerType(LAYER_TYPE_SOFTWARE, this)
             }
             //        shader = linearGradient
         }
@@ -135,13 +171,13 @@ class DoubleStripeView : FrameLayout {
     }
 
     private fun drawShapeRight(canvas: Canvas) {
-        with(paintRight) {
+        paintRight.apply {
             strokeWidth = 2.0f
             style = Paint.Style.FILL_AND_STROKE
             isAntiAlias = true
-            color = stripeRightColor?.defaultColor?:Color.BLACK
+            color = stripeRightColor?.defaultColor ?: Color.BLACK
 
-            if(stripesHaveShadow){
+            if (stripesHaveShadow) {
                 setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
                 setLayerType(LAYER_TYPE_SOFTWARE, this)
             }
@@ -174,6 +210,36 @@ class DoubleStripeView : FrameLayout {
         rectRight.set(
             w - Sw - Rw, 0, w - Sw, h
         )
+    }
+
+    // public apis except the attributes above
+    /**If this is set, the color given will be gone and the colors given here will be used*/
+    fun setGradientColorLeft(from: Int, to: Int) {
+        linearGradientLeft = createGradient(from, to)
+        invalidate()
+    }
+
+    /**If this is set, the color given will be gone and the colors given here will be used*/
+    fun setGradientColorRight(from: Int, to: Int) {
+        linearGradientRight = createGradient(from, to)
+        invalidate()
+    }
+
+    private fun createGradient(from: Int, to: Int) =
+        LinearGradient(
+            0.0f,
+            0.0f,
+            0.0f,
+            height.toFloat(),
+            from,
+            to,
+            Shader.TileMode.CLAMP
+        )
+
+
+    fun shouldShowAll(showAll: Boolean) {
+        shouldShowRight = showAll
+        shouldShowLeft = showAll
     }
 
 }

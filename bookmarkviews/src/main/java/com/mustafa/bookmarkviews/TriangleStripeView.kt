@@ -11,29 +11,36 @@ import android.widget.FrameLayout
 import androidx.annotation.AttrRes
 import androidx.annotation.StyleRes
 
-class TriangleStripeView: FrameLayout {
+class TriangleStripeView : FrameLayout {
 
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs, 0){
-        if(attrs!=null)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs, 0) {
+        if (attrs != null)
             initWithAttrs(attrs)
     }
-    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(context, attrs, defStyleAttr, 0){
-        if(attrs!=null)
+
+    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr,
+        0
+    ) {
+        if (attrs != null)
             initWithAttrs(attrs)
     }
+
     constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int, @StyleRes defStyleRes: Int) : super(
         context,
         attrs,
         defStyleAttr,
         defStyleRes
-    ){
-        if(attrs!=null)
+    ) {
+        if (attrs != null)
             initWithAttrs(attrs)
     }
 
-    init{
+    init {
         setWillNotDraw(false)
     }
 
@@ -41,13 +48,47 @@ class TriangleStripeView: FrameLayout {
     private val path = Path()
     private val paint = Paint()
 
-    private var triangleStripeHasShadow = false
-    private var triangleStripeColor: ColorStateList? = null
-    private var triangleCount = 3
-    private var triangleStripeDistanceFromEnd = 8.0f
-    private var distanceBetweenStripes = 4.0f
-    private var triangleStripeThickness = 6.0f
+    var triangleStripeHasShadow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
+    var triangleStripeColor: ColorStateList? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var triangleCount = 3
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var triangleStripeDistanceFromEnd = 8.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var distanceBetweenStripes = 4.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var triangleStripeThickness = 6.0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var shouldShow = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     private fun initWithAttrs(attrs: AttributeSet) {
         context.theme.obtainStyledAttributes(
@@ -58,7 +99,8 @@ class TriangleStripeView: FrameLayout {
 
             try {
                 triangleStripeColor = getColorStateList(R.styleable.TriangleStripeView_triangleStripeColor)
-                triangleStripeDistanceFromEnd = getDimension(R.styleable.TriangleStripeView_triangleStripeDistanceFromEnd, 8.0f)
+                triangleStripeDistanceFromEnd =
+                    getDimension(R.styleable.TriangleStripeView_triangleStripeDistanceFromEnd, 8.0f)
                 triangleCount = getInt(R.styleable.TriangleStripeView_triangleCount, 3)
                 distanceBetweenStripes = getDimension(R.styleable.TriangleStripeView_distanceBetweenStripes, 4.0f)
                 triangleStripeThickness = getDimension(R.styleable.TriangleStripeView_triangleStripeThickness, 8.0f)
@@ -70,15 +112,22 @@ class TriangleStripeView: FrameLayout {
     }
 
     override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
 
-        paint.strokeWidth = triangleStripeThickness
-        paint.color = triangleStripeColor?.defaultColor?:Color.BLACK
-        paint.style = Paint.Style.FILL_AND_STROKE
-        paint.isAntiAlias = true
+        if (!shouldShow) return
 
-        if(triangleStripeHasShadow){
-            paint.setShadowLayer(Util.convertDpToPixel(1.0f, context), 1.0f, 1.0f, Color.BLACK)
-            setLayerType(LAYER_TYPE_SOFTWARE, paint)
+        paint.apply {
+
+            strokeWidth = triangleStripeThickness
+            color = triangleStripeColor?.defaultColor ?: Color.BLACK
+            style = Paint.Style.FILL_AND_STROKE
+            isAntiAlias = true
+
+            if (triangleStripeHasShadow) {
+                setShadowLayer(Util.convertDpToPixel(1.0f, context), 1.0f, 1.0f, Color.BLACK)
+                setLayerType(LAYER_TYPE_SOFTWARE, this)
+            }
+
         }
 
         drawTriangles()
@@ -105,4 +154,5 @@ class TriangleStripeView: FrameLayout {
         }
 
     }
+
 }
