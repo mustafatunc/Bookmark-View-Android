@@ -12,7 +12,7 @@
 
     <!--Double Stripe View-->
     <declare-styleable name="DoubleStripeView">
-        <attr name="stripesHasShadow" format="boolean" />
+        <attr name="stripesHaveShadow" format="boolean" />
         <attr name="stripeRightColor" format="color"/>
         <attr name="stripeLeftColor" format="color"/>
         <attr name="stripeRightDistanceFromEnd" format="dimension"/>
