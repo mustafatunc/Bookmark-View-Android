@@ -46,6 +46,7 @@
         <attr name="triangleCount" format="integer" />
         <attr name="triangleStripeDistanceFromEnd" format="dimension" />
         <attr name="distanceBetweenStripes" format="dimension" />
+        <attr name="triangleStripeThickness" format="dimension" />
     </declare-styleable>
 
     <!--Triangle View-->

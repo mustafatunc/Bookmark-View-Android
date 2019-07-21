@@ -1,6 +1,7 @@
 package com.mustafa.bookmarkviews
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -36,36 +37,49 @@ class TriangleStripeView: FrameLayout {
         setWillNotDraw(false)
     }
 
-    private val DpTw = 8 // Ribbon width
-    private val DpTh = 8 // Ribbon height
-    private val DpD = 8
-
-    private val Tw: Float // Ribbon width
-    private val Th: Float // Ribbon height
-    private val d: Float // Ribbon height
 
     private val path = Path()
     private val paint = Paint()
 
-    init {
-        Tw = Util.convertDpToPixel(DpTw.toFloat(), context)
-        Th = Util.convertDpToPixel(DpTh.toFloat(), context)
-        d = Util.convertDpToPixel(DpD.toFloat(), context)
+    private var triangleStripeHasShadow = false
+    private var triangleStripeColor: ColorStateList? = null
+    private var triangleCount = 3
+    private var triangleStripeDistanceFromEnd = 8.0f
+    private var distanceBetweenStripes = 4.0f
+    private var triangleStripeThickness = 6.0f
 
-    }
 
     private fun initWithAttrs(attrs: AttributeSet) {
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.TriangleStripeView,
+            0, 0
+        ).apply {
 
+            try {
+                triangleStripeColor = getColorStateList(R.styleable.TriangleStripeView_triangleStripeColor)
+                triangleStripeDistanceFromEnd = getDimension(R.styleable.TriangleStripeView_triangleStripeDistanceFromEnd, 8.0f)
+                triangleCount = getInt(R.styleable.TriangleStripeView_triangleCount, 3)
+                distanceBetweenStripes = getDimension(R.styleable.TriangleStripeView_distanceBetweenStripes, 4.0f)
+                triangleStripeThickness = getDimension(R.styleable.TriangleStripeView_triangleStripeThickness, 8.0f)
+                triangleStripeHasShadow = getBoolean(R.styleable.TriangleStripeView_triangleStripeHasShadow, false)
+            } finally {
+                recycle()
+            }
+        }
     }
 
-    private fun drawShape(canvas: Canvas) {
+    override fun onDraw(canvas: Canvas) {
 
-        paint.strokeWidth = 6.0f
-        paint.color = Color.RED
+        paint.strokeWidth = triangleStripeThickness
+        paint.color = triangleStripeColor?.defaultColor?:Color.BLACK
         paint.style = Paint.Style.FILL_AND_STROKE
         paint.isAntiAlias = true
-//        paint.setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
-//        setLayerType(LAYER_TYPE_SOFTWARE, paint)
+
+        if(triangleStripeHasShadow){
+            paint.setShadowLayer(Util.convertDpToPixel(1.0f, context), 1.0f, 1.0f, Color.BLACK)
+            setLayerType(LAYER_TYPE_SOFTWARE, paint)
+        }
 
         drawTriangles()
 
@@ -76,9 +90,15 @@ class TriangleStripeView: FrameLayout {
 
     private fun drawTriangles() {
         val w = width.toFloat()
+
+        val Tw = triangleStripeDistanceFromEnd // Ribbon width
+        val Th = Tw // Ribbon height
+        val d = distanceBetweenStripes // Ribbon height
+
         path.fillType = Path.FillType.EVEN_ODD
 
-        for (i in 0..2) {
+
+        for (i in 1..triangleCount) {
             path.moveTo(w - Tw - i * d, 0.0f)
             path.lineTo(w - Tw - i * d, 0.0f) // Left Corner
             path.lineTo(w, Th + i * d) // Right Bottom Corner
