@@ -92,7 +92,7 @@ class RibbonView : FrameLayout {
             invalidate()
         }
 
-    var shouldShow = false
+    var ribbonVisible = false
         set(value) {
             field = value
             invalidate()
@@ -112,6 +112,7 @@ class RibbonView : FrameLayout {
                 ribbonWidth = getDimension(R.styleable.RibbonView_ribbonWidth, 8.0f)
                 ribbonTriangleHeight = getDimension(R.styleable.RibbonView_ribbonTriangleHeight, 8.0f)
                 distanceFromEnd = getDimension(R.styleable.RibbonView_ribbonDistanceFromEnd, 16.0f)
+                ribbonVisible = getBoolean(R.styleable.RibbonView_ribbonVisible, false)
 
             } finally {
                 recycle()
@@ -124,7 +125,10 @@ class RibbonView : FrameLayout {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        if (!shouldShow) return
+        if (!ribbonVisible) return
+
+        path.reset()
+        paint.reset()
 
         paint.apply {
             strokeWidth = 2.0f
@@ -137,9 +141,9 @@ class RibbonView : FrameLayout {
 
             if (ribbonHasShadow) {
                 setShadowLayer(
-                    Util.convertDpToPixel(2.0f, context),
-                    2.0f,
-                    2.0f,
+                    Util.convertDpToPixel(1.0f, context),
+                    1.0f,
+                    1.0f,
                     Color.BLACK
                 )
             }

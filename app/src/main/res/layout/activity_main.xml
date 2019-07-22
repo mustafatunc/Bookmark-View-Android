@@ -6,12 +6,11 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
     <com.mustafa.bookmarkviews.RibbonView
-            android:background="@color/colorPrimary"
+            android:background="#582c4d"
             android:id="@+id/ribbonView"
             android:layout_width="match_parent"
-            app:ribbonColor="@color/colorAccent"
+            app:ribbonColor="#ece2d0"
             app:ribbonHeight="32dp"
             app:ribbonWidth="16dp"
             app:ribbonTriangleHeight="8dp"
@@ -24,84 +23,182 @@
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp">
+        <TextView
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="RibbonView"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
     </com.mustafa.bookmarkviews.RibbonView>
 
     <com.mustafa.bookmarkviews.StripeView
-            app:stripeColor="@color/colorAccent"
+            app:stripeColor="#fc6471"
             app:stripeHasShadow="true"
             app:stripeDistanceFromEnd="12dp"
             app:stripeWidth="8dp"
-            android:background="@color/colorPrimary"
+            android:background="#dddddd"
             android:layout_width="match_parent"
             android:layout_height="54dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/ribbonView" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:id="@+id/stripeView">
-
+        <TextView
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="StripeView"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
     </com.mustafa.bookmarkviews.StripeView>
 
     <com.mustafa.bookmarkviews.TriangleStripeView
             app:triangleCount="3"
             app:triangleStripeThickness="2dp"
-            app:triangleStripeColor="@color/colorAccent"
+            app:triangleStripeColor="#d0db97"
             app:triangleStripeDistanceFromEnd="4dp"
             app:triangleStripeHasShadow="true"
             app:distanceBetweenStripes="8dp"
-            android:background="@color/colorPrimary"
+            android:background="#181d27"
             android:layout_width="match_parent"
             android:layout_height="54dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/stripeView" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintHorizontal_bias="1.0" android:id="@+id/triangleStripeView">
+        <TextView
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="TriangleStripeView"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
     </com.mustafa.bookmarkviews.TriangleStripeView>
 
     <com.mustafa.bookmarkviews.DoubleStripeView
-            app:stripeRightColor="@color/colorAccent"
-            app:stripeLeftColor="@android:color/holo_orange_dark"
+            app:stripeRightColor="#e63946"
+            app:stripeLeftColor="#f1faee"
             app:stripeRightDistanceFromEnd="4dp"
             app:stripeRightWidth="8dp"
             app:stripeLeftWidth="4dp"
             app:stripeLeftDistanceFromRightStripe="4dp"
             app:stripesHaveShadow="true"
-
-            android:background="@color/colorPrimary"
+            android:background="#457b9d"
             android:layout_width="match_parent"
             android:layout_height="54dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/triangleStripeView" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.0">
+            app:layout_constraintHorizontal_bias="0.0" android:id="@+id/doubleStripeView">
+
+        <TextView
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="DoubleStripeView"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
     </com.mustafa.bookmarkviews.DoubleStripeView>
 
+    <com.mustafa.bookmarkviews.CircleView
+            app:circleColor="#0d2149"
+            app:circleHasShadow="true"
+            app:circleDistanceFromTop="0dp"
+            app:circleDistanceFromEnd="0dp"
+            app:circleRadius="16dp"
+            android:background="#f9ebe0"
+            android:layout_width="match_parent"
+            android:layout_height="54dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/doubleStripeView" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="1.0" android:id="@+id/circleView">
+
+        <TextView
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="CircleView"
+                android:textColor="#208aae"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </com.mustafa.bookmarkviews.CircleView>
+
+    <com.mustafa.bookmarkviews.RibbonView
+            android:background="#a40e4c"
+            android:id="@+id/ribbonView2"
+            android:layout_width="match_parent"
+            app:ribbonColor="#2c2c54"
+            app:ribbonHeight="32dp"
+            app:ribbonWidth="16dp"
+            app:ribbonTriangleHeight="-8dp"
+            app:ribbonDistanceFromEnd="16dp"
+            app:ribbonHasShadow="true"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintTop_toBottomOf="@+id/circleView">
+    <TextView
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="RibbonView"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.mustafa.bookmarkviews.RibbonView>
 
     <com.mustafa.bookmarkviews.CircleView
-            android:background="@color/colorPrimary"
+            android:background="#e63946"
             android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:circleColor="@color/colorAccent"
+            app:circleColor="#a8dadc"
             app:circleHasShadow="true"
             app:circleDistanceFromEnd="20dp"
             app:circleDistanceFromTop="20dp"
             app:circleRadius="8dp"
             android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent">
-
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/ribbonView2" android:id="@+id/circleView2">
+        <TextView
+                android:gravity="center_vertical"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="16dp"
+                android:text="CircleView"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
     </com.mustafa.bookmarkviews.CircleView>
 
     <com.mustafa.bookmarkviews.TriangleView
-            app:triangleColor="@color/colorAccent"
+            app:triangleColor="#3c4f76"
             app:triangleHeight="24dp"
             app:triangleWidth="32dp"
             app:triangleHasShadow="true"
-            android:background="@color/colorPrimary"
+            android:background="#dddbf1"
             android:layout_width="160dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp">
-
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@+id/circleView2" android:id="@+id/triangleView"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+                android:gravity="center_vertical"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="16dp"
+                android:text="TriangleView"
+                android:textColor="#383f51"
+                android:textSize="24sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
     </com.mustafa.bookmarkviews.TriangleView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,7 +70,7 @@ class StripeView : FrameLayout {
             invalidate()
         }
 
-    var shouldShow = false
+    var stripeVisible = false
         set(value) {
             field = value
             invalidate()
@@ -89,6 +89,7 @@ class StripeView : FrameLayout {
                 stripeDistanceFromEnd = getDimension(R.styleable.StripeView_stripeDistanceFromEnd, 16.0f)
                 stripeWidth = getDimension(R.styleable.StripeView_stripeWidth, 8.0f)
                 stripeHasShadow = getBoolean(R.styleable.StripeView_stripeHasShadow, false)
+                stripeVisible = getBoolean(R.styleable.StripeView_stripeVisible, false)
             } finally {
                 recycle()
             }
@@ -98,7 +99,9 @@ class StripeView : FrameLayout {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        if (!shouldShow) return
+        if (!stripeVisible) return
+
+        paint.reset()
 
         paint.apply {
 
@@ -111,7 +114,7 @@ class StripeView : FrameLayout {
             }
 
             if (stripeHasShadow) {
-                setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
+                setShadowLayer(Util.convertDpToPixel(1.0f, context), 1.0f, 1.0f, Color.BLACK)
                 setLayerType(LAYER_TYPE_SOFTWARE, this)
             }
 

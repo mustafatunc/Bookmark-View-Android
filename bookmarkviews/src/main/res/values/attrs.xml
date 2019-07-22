@@ -3,6 +3,7 @@
 
     <!--Circle View-->
     <declare-styleable name="CircleView">
+        <attr name="circleVisible" format="boolean" />
         <attr name="circleHasShadow" format="boolean" />
         <attr name="circleColor" format="color"/>
         <attr name="circleRadius" format="dimension"/>
@@ -12,6 +13,7 @@
 
     <!--Double Stripe View-->
     <declare-styleable name="DoubleStripeView">
+        <attr name="stripesVisible" format="boolean" />
         <attr name="stripesHaveShadow" format="boolean" />
         <attr name="stripeRightColor" format="color"/>
         <attr name="stripeLeftColor" format="color"/>
@@ -23,6 +25,7 @@
 
     <!--Ribbon View-->
     <declare-styleable name="RibbonView">
+        <attr name="ribbonVisible" format="boolean" />
         <attr name="ribbonHasShadow" format="boolean" />
         <attr name="ribbonColor" format="color" />
         <attr name="ribbonWidth" format="dimension" />
@@ -33,6 +36,7 @@
 
     <!--Stripe View-->
     <declare-styleable name="StripeView">
+        <attr name="stripeVisible" format="boolean" />
         <attr name="stripeHasShadow" format="boolean" />
         <attr name="stripeDistanceFromEnd" format="dimension" />
         <attr name="stripeWidth" format="dimension" />
@@ -41,6 +45,7 @@
 
     <!--Triangle Stripes View-->
     <declare-styleable name="TriangleStripeView">
+        <attr name="triangleStripesVisible" format="boolean" />
         <attr name="triangleStripeHasShadow" format="boolean" />
         <attr name="triangleStripeColor" format="color" />
         <attr name="triangleCount" format="integer" />
@@ -51,6 +56,7 @@
 
     <!--Triangle View-->
     <declare-styleable name="TriangleView">
+        <attr name="triangleVisible" format="boolean" />
         <attr name="triangleHasShadow" format="boolean" />
         <attr name="triangleColor" format="color" />
         <attr name="triangleWidth" format="dimension" />

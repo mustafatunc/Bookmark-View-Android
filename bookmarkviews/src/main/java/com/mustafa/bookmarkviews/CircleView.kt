@@ -70,7 +70,7 @@ class CircleView : FrameLayout {
             invalidate()
         }
 
-    var shouldShow = false
+    var circleVisible = false
         set(value) {
             field = value
             invalidate()
@@ -93,7 +93,7 @@ class CircleView : FrameLayout {
                 circleRadius = getDimension(R.styleable.CircleView_circleRadius, 8.0f)
                 distanceFromEnd = getDimension(R.styleable.CircleView_circleDistanceFromEnd, 16.0f)
                 distanceFromTop = getDimension(R.styleable.CircleView_circleDistanceFromTop, 16.0f)
-
+                circleVisible = getBoolean(R.styleable.CircleView_circleVisible, false)
             } finally {
                 recycle()
             }
@@ -103,7 +103,10 @@ class CircleView : FrameLayout {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        if (shouldShow) {
+
+        paint.reset()
+
+        if (circleVisible) {
             canvas?.let { drawShape(it) }
         }
     }

@@ -71,7 +71,7 @@ class TriangleView : FrameLayout {
             invalidate()
         }
 
-    var shouldShow = false
+    var triangleVisible = true
         set(value) {
             field = value
             invalidate()
@@ -89,6 +89,7 @@ class TriangleView : FrameLayout {
                 triangleWidth = getDimension(R.styleable.TriangleView_triangleWidth, 8.0f)
                 triangleHeight = getDimension(R.styleable.TriangleView_triangleHeight, 8.0f)
                 triangleHasShadow = getBoolean(R.styleable.TriangleView_triangleHasShadow, false)
+                triangleVisible = getBoolean(R.styleable.TriangleView_triangleVisible, false)
             } finally {
                 recycle()
             }
@@ -98,7 +99,10 @@ class TriangleView : FrameLayout {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        if (!shouldShow) return
+        if (!triangleVisible) return
+
+        path.reset()
+        paint.reset()
 
         with(paint) {
             strokeWidth = 2.0f
@@ -110,7 +114,7 @@ class TriangleView : FrameLayout {
             }
 
             if (triangleHasShadow) {
-                setShadowLayer(Util.convertDpToPixel(2.0f, context), -2.0f, -2.0f, Color.BLACK)
+                setShadowLayer(Util.convertDpToPixel(1.0f, context), -1.0f, -1.0f, Color.BLACK)
                 setLayerType(LAYER_TYPE_SOFTWARE, this)
             }
         }

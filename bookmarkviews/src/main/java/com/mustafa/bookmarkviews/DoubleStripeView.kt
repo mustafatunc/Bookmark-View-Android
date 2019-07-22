@@ -124,7 +124,9 @@ class DoubleStripeView : FrameLayout {
                 stripeRightWidth = getDimension(R.styleable.DoubleStripeView_stripeRightWidth, 16.0f)
 
                 stripesHaveShadow = getBoolean(R.styleable.DoubleStripeView_stripesHaveShadow, false)
-
+                getBoolean(R.styleable.DoubleStripeView_stripesVisible, false).also{
+                    shouldShowAll(it)
+                }
 
                 stripeLeftDistanceFromRightStripe =
                     getDimension(R.styleable.DoubleStripeView_stripeLeftDistanceFromRightStripe, 8.0f)
@@ -140,6 +142,9 @@ class DoubleStripeView : FrameLayout {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+
+        paintLeft.reset()
+        paintRight.reset()
 
         canvas?.let {
             if (shouldShowLeft) {
@@ -160,7 +165,7 @@ class DoubleStripeView : FrameLayout {
             color = stripeLeftColor?.defaultColor ?: Color.BLACK
 
             if (stripesHaveShadow) {
-                setShadowLayer(Util.convertDpToPixel(2.0f, context), 2.0f, 2.0f, Color.BLACK)
+                setShadowLayer(Util.convertDpToPixel(1.0f, context), 1.0f, 1.0f, Color.BLACK)
                 setLayerType(LAYER_TYPE_SOFTWARE, this)
             }
             //        shader = linearGradient

@@ -84,7 +84,7 @@ class TriangleStripeView : FrameLayout {
             invalidate()
         }
 
-    var shouldShow = false
+    var triangleStripesVisible = true
         set(value) {
             field = value
             invalidate()
@@ -105,6 +105,7 @@ class TriangleStripeView : FrameLayout {
                 distanceBetweenStripes = getDimension(R.styleable.TriangleStripeView_distanceBetweenStripes, 4.0f)
                 triangleStripeThickness = getDimension(R.styleable.TriangleStripeView_triangleStripeThickness, 8.0f)
                 triangleStripeHasShadow = getBoolean(R.styleable.TriangleStripeView_triangleStripeHasShadow, false)
+                triangleStripesVisible = getBoolean(R.styleable.TriangleStripeView_triangleStripesVisible, false)
             } finally {
                 recycle()
             }
@@ -114,7 +115,10 @@ class TriangleStripeView : FrameLayout {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        if (!shouldShow) return
+        if (!triangleStripesVisible) return
+
+        paint.reset()
+        path.reset()
 
         paint.apply {
 
