@@ -3,36 +3,36 @@ Bookmark or Tag icons for Android Views. Supports ribbon, triangle, stripes, and
 Uses Canvas to draw all the shapes, none drawable is used.
 I tried to add the things that I thought they would look cool.
 I am open to new ideas, feel free to contribute.
-
+<br>
 **What do these do?**
-<p/>
+<br>
 These are custom views that extend *FrameLayout*. They draw a shape on top the view using *canvas*.
 
 **What do these not do?**
-<p/>
+<br>
 These  don't care about what is under them. They don't check if they exceeed the limits. They don't use gradient colors (for now)
 
 **How They Look**:
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/allviews.png" width="300">
 
-<p/>
-<p/>
+<br>
+<br>
 
 Here's all the views explained.
-<p/>
-<p/>
+<br>
+<br>
 
 **RibbonView**
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/ribbon_regular.jpg" width="300">
-<p/>
+<br>
 Positive *ribbonTriangleHeight*
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/ribbon_tie.jpg" width="300">
-<p/>
+<br>
 Negative *ribbonTriangleHeight*
-<p/>
+<br>
 ```xml
 <com.mustafa.bookmarkviews.RibbonView
 		app:ribbonColor="#ece2d0"
@@ -55,13 +55,13 @@ var ribbonTriangleHeight: Float
 var ribbonDistanceFromEnd: Float
 fun setGradientColor(from: Int, to: Int)
 ```
-<p/>
-<p/>
+<br>
+<br>
 
 **StripeView**
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/stripe.jpg" width="300">
-<p/>
+<br>
 ```xml
  <com.mustafa.bookmarkviews.StripeView
             app:stripeColor="#fc6471"
@@ -81,13 +81,13 @@ var stripeDistanceFromEnd: Float
 fun setGradientColor(from: Int, to: Int)
 ```
 
-<p/>
-<p/>
+<br>
+<br>
 
 **TriangleStripeView**
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/triangle_stripes.jpg" width="300">
-<p/>
+<br>
 ```xml
 <com.mustafa.bookmarkviews.TriangleStripeView
 		app:triangleCount="3"
@@ -109,13 +109,13 @@ var distanceBetweenStripes: Float
 var triangleStripeThickness: Float
 var triangleCount: Int
 ```
-<p/>
-<p/>
+<br>
+<br>
 
 **DoubleStripeView**
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/double_stripe.jpg" width="300">
-<p/>
+<br>
 ```xml
 <com.mustafa.bookmarkviews.DoubleStripeView
             app:stripeRightColor="#e63946"
@@ -143,19 +143,19 @@ fun shouldShowAllStripes(Boolean)
 fun setGradientColorLeftStripe(from: Int, to: Int)
 fun setGradientColorRightStripe(from: Int, to: Int)
 ```
-<p/>
-<p/>
+<br>
+<br>
 
 **CircleView**
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/circle_corner.jpg" width="300">
-<p/>
+<br>
 *circleDistanceFromTop* and *circleDistanceFromEnd* are *0dp*
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/circle_box.jpg" width="300">
-<p/>
+<br>
 *circleDistanceFromTop* and *circleDistanceFromEnd* are *16dp*
-<p/>
+<br>
 ```xml
 <com.mustafa.bookmarkviews.CircleView
             app:circleColor="#0d2149"
@@ -177,14 +177,14 @@ var circleVisible: Boolean
 fun setGradientColor(from: Int, to: Int)
 ```
 
-<p/>
-<p/>
+<br>
+<br>
 
 
 **TriangleView**
-<p/>
+<br>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/triangle.jpg" width="300">
-<p/>
+<br>
 ```xml
 <com.mustafa.bookmarkviews.TriangleView
             app:triangleColor="#3c4f76"
@@ -203,8 +203,8 @@ var triangleHeight: Float
 var triangleVisible: Boolean
 fun setGradientColor(from: Int, to: Int)
 ```
-<p/>
-<p/>
+<br>
+<br>
 
 
 
