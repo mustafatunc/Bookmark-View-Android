@@ -86,7 +86,7 @@ class RibbonView : FrameLayout {
             invalidate()
         }
 
-    var distanceFromEnd = 0.0f
+    var ribbonDistanceFromEnd = 0.0f
         set(value) {
             field = value
             invalidate()
@@ -111,7 +111,7 @@ class RibbonView : FrameLayout {
                 ribbonHeight = getDimension(R.styleable.RibbonView_ribbonHeight, 24.0f)
                 ribbonWidth = getDimension(R.styleable.RibbonView_ribbonWidth, 8.0f)
                 ribbonTriangleHeight = getDimension(R.styleable.RibbonView_ribbonTriangleHeight, 8.0f)
-                distanceFromEnd = getDimension(R.styleable.RibbonView_ribbonDistanceFromEnd, 16.0f)
+                ribbonDistanceFromEnd = getDimension(R.styleable.RibbonView_ribbonDistanceFromEnd, 16.0f)
                 ribbonVisible = getBoolean(R.styleable.RibbonView_ribbonVisible, false)
 
             } finally {
@@ -158,7 +158,7 @@ class RibbonView : FrameLayout {
     private fun drawRibbon() {
         val w = width.toFloat()
 
-        val Sw = distanceFromEnd // Space width from right edge
+        val Sw = ribbonDistanceFromEnd // Space width from right edge
         val Rw = ribbonWidth // Ribbon width
         val Rh = ribbonHeight // Ribbon height
         val Rt = ribbonTriangleHeight // Ribbon triangle height

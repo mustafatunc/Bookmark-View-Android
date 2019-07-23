@@ -48,7 +48,7 @@ class CircleView : FrameLayout {
             invalidate()
         }
 
-    var hasShadow = false
+    var circleHasShadow = false
         set(value) {
             field = value
             invalidate()
@@ -59,12 +59,12 @@ class CircleView : FrameLayout {
             field = value
             invalidate()
         }
-    var distanceFromEnd = 16.0f
+    var circleDistanceFromEnd = 16.0f
         set(value) {
             field = value
             invalidate()
         }
-    var distanceFromTop = 16.0f
+    var circleDistanceFromTop = 16.0f
         set(value) {
             field = value
             invalidate()
@@ -89,10 +89,10 @@ class CircleView : FrameLayout {
 
             try {
                 circleColor = getColorStateList(R.styleable.CircleView_circleColor)
-                hasShadow = getBoolean(R.styleable.CircleView_circleHasShadow, false)
+                circleHasShadow = getBoolean(R.styleable.CircleView_circleHasShadow, false)
                 circleRadius = getDimension(R.styleable.CircleView_circleRadius, 8.0f)
-                distanceFromEnd = getDimension(R.styleable.CircleView_circleDistanceFromEnd, 16.0f)
-                distanceFromTop = getDimension(R.styleable.CircleView_circleDistanceFromTop, 16.0f)
+                circleDistanceFromEnd = getDimension(R.styleable.CircleView_circleDistanceFromEnd, 16.0f)
+                circleDistanceFromTop = getDimension(R.styleable.CircleView_circleDistanceFromTop, 16.0f)
                 circleVisible = getBoolean(R.styleable.CircleView_circleVisible, false)
             } finally {
                 recycle()
@@ -121,13 +121,13 @@ class CircleView : FrameLayout {
                 shader = linearGradient
             }
 
-            if (hasShadow) {
+            if (circleHasShadow) {
                 setShadowLayer(Util.convertDpToPixel(1.0f, context), 1.0f, 1.0f, Color.BLACK)
                 setLayerType(LAYER_TYPE_SOFTWARE, this)
             }
         }
 
-        canvas.drawCircle(width.toFloat() - distanceFromEnd, distanceFromTop, circleRadius, paint)
+        canvas.drawCircle(width.toFloat() - circleDistanceFromEnd, circleDistanceFromTop, circleRadius, paint)
     }
 
 

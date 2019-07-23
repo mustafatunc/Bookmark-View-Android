@@ -95,13 +95,13 @@ class DoubleStripeView : FrameLayout {
         }
 
 
-    var shouldShowLeft = false
+    var shouldShowLeftStripe = false
         set(value) {
             field = value
             invalidate()
         }
 
-    var shouldShowRight = false
+    var shouldShowRightStripe = false
         set(value) {
             field = value
             invalidate()
@@ -125,7 +125,7 @@ class DoubleStripeView : FrameLayout {
 
                 stripesHaveShadow = getBoolean(R.styleable.DoubleStripeView_stripesHaveShadow, false)
                 getBoolean(R.styleable.DoubleStripeView_stripesVisible, false).also{
-                    shouldShowAll(it)
+                    shouldShowAllStripes(it)
                 }
 
                 stripeLeftDistanceFromRightStripe =
@@ -147,10 +147,10 @@ class DoubleStripeView : FrameLayout {
         paintRight.reset()
 
         canvas?.let {
-            if (shouldShowLeft) {
+            if (shouldShowLeftStripe) {
                 drawShapeLeft(it)
             }
-            if (shouldShowRight) {
+            if (shouldShowRightStripe) {
                 drawShapeRight(it)
             }
         }
@@ -219,13 +219,13 @@ class DoubleStripeView : FrameLayout {
 
     // public apis except the attributes above
     /**If this is set, the color given will be gone and the colors given here will be used*/
-    fun setGradientColorLeft(from: Int, to: Int) {
+    fun setGradientColorLeftStripe(from: Int, to: Int) {
         linearGradientLeft = createGradient(from, to)
         invalidate()
     }
 
     /**If this is set, the color given will be gone and the colors given here will be used*/
-    fun setGradientColorRight(from: Int, to: Int) {
+    fun setGradientColorRightStripe(from: Int, to: Int) {
         linearGradientRight = createGradient(from, to)
         invalidate()
     }
@@ -242,9 +242,9 @@ class DoubleStripeView : FrameLayout {
         )
 
 
-    fun shouldShowAll(showAll: Boolean) {
-        shouldShowRight = showAll
-        shouldShowLeft = showAll
+    fun shouldShowAllStripes(showAll: Boolean) {
+        shouldShowRightStripe = showAll
+        shouldShowLeftStripe = showAll
     }
 
 }

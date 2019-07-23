@@ -21,6 +21,17 @@ RibbonView
 	..Other Stuff
 </com.mustafa.bookmarkviews.RibbonView>
 ```
+```kotlin
+// RibbonView fields
+var ribbonHasShadow: Boolean
+var ribbonVisible: Boolean
+var ribbonColor: ColorStateList?
+var ribbonWidth: Float
+var ribbonHeight: Float
+var ribbonTriangleHeight: Float
+var ribbonDistanceFromEnd: Float
+fun setGradientColor(from: Int, to: Int)
+```
 <p/>
 <p/>
 
@@ -34,6 +45,16 @@ StripeView
 		..Other Stuff
     </com.mustafa.bookmarkviews.StripeView>
 ```
+```kotlin
+// StripeView fields
+var stripeHasShadow: Boolean
+var stripeVisible: Boolean
+var stripeColor: ColorStateList?
+var stripeWidth: Float
+var stripeDistanceFromEnd: Float
+fun setGradientColor(from: Int, to: Int)
+```
+
 <p/>
 <p/>
 
@@ -48,6 +69,16 @@ TriangleStripeView
 		app:distanceBetweenStripes="8dp">
 	..Other Stuff
 </com.mustafa.bookmarkviews.TriangleStripeView>
+```
+```kotlin
+// TriangleStripeView fields
+var triangleStripeHasShadow: Boolean
+var triangleStripesVisible: Boolean
+var triangleStripeColor: ColorStateList?
+var triangleStripeDistanceFromEnd: Float
+var distanceBetweenStripes: Float
+var triangleStripeThickness: Float
+var triangleCount: Int
 ```
 <p/>
 <p/>
@@ -65,6 +96,21 @@ DoubleStripeView
 	..Other Stuff
     </com.mustafa.bookmarkviews.DoubleStripeView>
 ```
+```kotlin
+// DoubleStripeView fields
+var stripesHaveShadow: Boolean
+var shouldShowLeftStripe: Boolean
+var shouldShowRightStripe: Boolean
+var stripeRightColor: ColorStateList?
+var stripeLeftColor: ColorStateList?
+var stripeRightDistanceFromEnd: Float
+var stripeLeftDistanceFromRightStripe: Float
+var stripeRightWidth: Float
+var stripeLeftWidth: Float
+fun shouldShowAllStripes(Boolean)
+fun setGradientColorLeftStripe(from: Int, to: Int)
+fun setGradientColorRightStripe(from: Int, to: Int)
+```
 <p/>
 <p/>
 
@@ -79,6 +125,17 @@ CircleView
         ..Other Stuff
     </com.mustafa.bookmarkviews.CircleView>
 ```
+```kotlin
+// DoubleStripeView fields
+var circleHasShadow: Boolean
+var circleColor: ColorStateList?
+var circleRadius: Float
+var circleDistanceFromEnd: Float
+var circleDistanceFromTop: Float
+var circleVisible: Boolean
+fun setGradientColor(from: Int, to: Int)
+```
+
 <p/>
 <p/>
 
@@ -91,6 +148,15 @@ TriangleView
             app:triangleHasShadow="true">
 		..Other Stuff
     </com.mustafa.bookmarkviews.TriangleView>
+```
+```kotlin
+// DoubleStripeView fields
+var triangleHasShadow: Boolean
+var triangleColor: ColorStateList?
+var triangleWidth: Float
+var triangleHeight: Float
+var triangleVisible: Boolean
+fun setGradientColor(from: Int, to: Int)
 ```
 <p/>
 <p/>
