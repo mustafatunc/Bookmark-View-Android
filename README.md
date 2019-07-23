@@ -20,6 +20,7 @@ These  don't care about what is under them. They don't check if they exceeed the
 Here's all the views explained.
 
 **RibbonView**
+<p/>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/ribbon_regular.jpg" width="300">
 Positive *ribbonTriangleHeight*
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/ribbon_tie.jpg" width="300">
@@ -50,6 +51,7 @@ fun setGradientColor(from: Int, to: Int)
 <p/>
 
 **StripeView**
+<p/>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/stripe.jpg" width="300">
 
 ```xml
@@ -75,6 +77,7 @@ fun setGradientColor(from: Int, to: Int)
 <p/>
 
 **TriangleStripeView**
+<p/>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/triangle_stripes.jpg" width="300">
 
 ```xml
@@ -102,6 +105,7 @@ var triangleCount: Int
 <p/>
 
 **DoubleStripeView**
+<p/>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/double_stripe.jpg" width="300">
 
 ```xml
@@ -135,6 +139,7 @@ fun setGradientColorRightStripe(from: Int, to: Int)
 <p/>
 
 **CircleView**
+<p/>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/circle_corner.jpg" width="300">
 *circleDistanceFromTop* and *circleDistanceFromEnd* are *0dp*
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/circle_box.jpg" width="300">
@@ -165,6 +170,7 @@ fun setGradientColor(from: Int, to: Int)
 
 
 **TriangleView**
+<p/>
 <img src="https://github.com/mustafatunc/bookmark-view-android/blob/master/screenshots/triangle.jpg" width="300">
 
 ```xml
