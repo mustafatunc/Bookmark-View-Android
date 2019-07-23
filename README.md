@@ -4,13 +4,14 @@ Uses Canvas to draw all the shapes, none drawable is used.
 I tried to add the things that I thought they would look cool.
 I am open to new ideas, feel free to contribute.
 <br>
+<br>
 **What do these do?**
 <br>
 These are custom views that extend *FrameLayout*. They draw a shape on top the view using *canvas*.
 
 **What do these not do?**
 <br>
-These  don't care about what is under them. They don't check if they exceeed the limits. They don't use gradient colors (for now)
+These  don't care about what is under them. They don't check if they exceeed the limits. They don't use gradient colors and drawable selectors(for now)
 
 **How They Look**:
 <br>
